@@ -2,8 +2,9 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HeaderBackButton } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import { navigationRef } from "./RootNavigation";
+
+
 
 
 import SignUp from './screens/SignupScreens'
@@ -54,7 +55,7 @@ function TrackStack() {
 function MainNavigation() {
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName="SignUp">
         <Stack.Screen
           name="SignUp"
@@ -63,7 +64,13 @@ function MainNavigation() {
             header: () => false,
           }}
         />
-        <Stack.Screen name="Signin" component={Signin} />
+        <Stack.Screen
+          name="Signin"
+          component={Signin}
+          options={{
+            header: () => false,
+          }}
+        />
         <Stack.Screen
           name="MainFlow"
           component={MyTabs}
